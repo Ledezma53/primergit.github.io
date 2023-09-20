@@ -1,4 +1,64 @@
 <!DOCTYPE html>
-<html>
-<h1>HELLO WORDL!</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación de "TE AMO" con JavaScript</title>
+    <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(45deg, #FFC0CB, #FF69B4); /* Degradado de colores */
+}
+
+#message {
+    font-size: 144px;
+    font-weight: bold;
+    white-space: nowrap;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    color: #fff; /* Color del texto */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    border: 3px solid #FF69B4; /* Borde rosa */
+    padding: 20px; /* Espaciado adicional */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+    </style>
+</head>
+<body>
+    <div id="message">T</div>
+    <script>
+        const message = document.getElementById('message');
+        const messageText = "TE AMO";
+        let currentPosition = 0;
+        let currentLetter = 1;
+        let isMovingRight = true;
+
+        function animate() {
+            currentPosition += isMovingRight ? 4 : -4; // El doble de rápido
+            message.style.left = currentPosition + 'px';
+
+            if (currentPosition >= window.innerWidth) {
+                isMovingRight = false;
+                if (currentLetter < messageText.length) {
+                    message.textContent = messageText.substring(0, currentLetter + 1);
+                    currentLetter++;
+                }
+            } else if (currentPosition <= 0) {
+                isMovingRight = true;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
 </html>
+
